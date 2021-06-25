@@ -51,6 +51,7 @@ namespace WineAPI.ResourceParameters
         public string searchQuery { get; set; }
         public string orderBy { get; set; } = "rack_row, rack_col";
         public string getCurrentOrHistory { get; set; }
+        public string assigned { get; set; }
         public string minYear { get; set; }
         public string maxYear { get; set; }
         public string minPrice { get; set; }

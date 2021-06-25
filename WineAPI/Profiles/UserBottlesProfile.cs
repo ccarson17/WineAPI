@@ -12,7 +12,9 @@ namespace WineAPI.Profiles
         public UserBottlesProfile()
         {
             CreateMap<Models.UserBottleForCreationDto, WineDataContext.tbl_Rack_Contents_Item>();
+            CreateMap<Models.UserBottleForEzCreationDto, WineDataContext.tbl_Rack_Contents_Item>();
             CreateMap<WineDataContext.tbl_Rack_Contents_Item, Models.UserBottleForUpdateDto>();
+            CreateMap<WineDataContext.tbl_Rack_Contents_Item, Models.UserBottleForEzCreationDto>();
             CreateMap<Models.UserBottleForUpdateDto, WineDataContext.tbl_Rack_Contents_Item>();
             CreateMap<UserBottleDtoNoDetail, UserBottleDtoNoDetailHateoas>();
             CreateMap<UserBottleDto, UserBottleDtoHateoas>();

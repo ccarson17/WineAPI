@@ -28,5 +28,6 @@ namespace WineAPI.Models
         public string postal_code { get; set; }
         public string family_name { get; set; }
         public string email { get; set; }
+        public string siteTheme { get; set; }
     }
 }

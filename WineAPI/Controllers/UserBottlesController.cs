@@ -61,6 +61,9 @@ namespace WineAPI.Controllers
             if (parameters.rack_row != 0) collection = collection.Where(x => x.rack_row == parameters.rack_row);
             if (parameters.getCurrentOrHistory == "current") collection = collection.Where(x => x.drink_date == null);
             else if (parameters.getCurrentOrHistory == "history") collection = collection.Where(x => x.drink_date != null);
+            if (parameters.assigned == "no") collection = collection.Where(x => x.rack_guid == null);
+            else if (parameters.assigned == "yes") collection = collection.Where(x => x.rack_guid != null);
+
             // if user doesn't want bottle details, simply return now
             if (parameters.skip_details)
             {
@@ -303,6 +306,7 @@ namespace WineAPI.Controllers
             var bottle = _wineData.tbl_Wine_Bottles.Where(x => x.guid == userbottle.bottle_guid).FirstOrDefault();
             if (bottle == null) return BadRequest("Bottle guid not found: " + userbottle.bottle_guid);
             userBottleEntity.guid = Guid.NewGuid().ToString();
+            if (userBottleEntity.created_date == null) userBottleEntity.created_date = DateTime.UtcNow;
             _wineData.tbl_Rack_Contents.Add(userBottleEntity);
             _wineData.SaveChanges();
             var userBottleToReturn = _mapper.MergeInto<UserBottleDto>(userBottleEntity, bottle);
@@ -351,6 +355,14 @@ namespace WineAPI.Controllers
                     bottleToUpdate.rack_row <= 0 || bottleToUpdate.rack_col <= 0)
                 {
                     bottleToUpdate.rack_guid = null;
+                }
+            }
+            else
+            {
+                if (bottleToUpdate.rack_name != null)
+                {
+                    var existingRack = _wineData.tbl_Wine_Racks.Where(x => x.owner_guid == bottleToUpdate.owner_guid && x.rack_name == bottleToUpdate.rack_name).FirstOrDefault();
+                    bottleToUpdateEntityOutput.rack_guid = existingRack.guid;
                 }
             }
             var bottle = _wineData.tbl_Wine_Bottles.Where(x => x.guid == bottleToUpdate.bottle_guid).FirstOrDefault();

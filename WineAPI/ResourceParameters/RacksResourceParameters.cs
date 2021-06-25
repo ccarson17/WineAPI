@@ -8,7 +8,7 @@ namespace WineAPI.ResourceParameters
 {
     public class RacksResourceParameters
     {
-        const int maxPageSize = 5;
+        const int maxPageSize = 250;
         [MaxLength(128)]
         public string guid { get; set; }
         public long rows { get; set; }

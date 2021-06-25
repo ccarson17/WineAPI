@@ -286,6 +286,17 @@ namespace WineAPI.Controllers
             if (ownerId == null || rackId == null) BadRequest("Error: guid and owner_guid are required");
             var rackToDelete = _wineData.tbl_Wine_Racks.Where(x => x.owner_guid == ownerId.ToString() && x.guid == rackId.ToString()).FirstOrDefault();
             if (rackToDelete == null) return NotFound();
+            var rackContents = _wineData.tbl_Rack_Contents.Where(x => x.rack_guid == rackId.ToString()).ToList();
+            if(rackContents.Count > 0)
+            {
+                foreach(var item in rackContents)
+                {
+                    item.rack_row = 0;
+                    item.rack_col = 0;
+                    item.rack_guid = null;
+                    item.rack_name = null;
+                }
+            }
             _wineData.tbl_Wine_Racks.Remove(rackToDelete);
             _wineData.SaveChanges();
             return NoContent();

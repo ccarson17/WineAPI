@@ -36,6 +36,8 @@ namespace WineAPI.Profiles
             CreateMap<Models.BottleForCreationDto, WineDataContext.tbl_Wine_Bottles_Item>();
             CreateMap<Models.BottleForUpdateDto, WineDataContext.tbl_Wine_Bottles_Item>();
             CreateMap<Models.BottleForUpdateDto, Models.BottleForUpdateDtoHateoas>();
+            CreateMap<Models.UserBottleForEzCreationDto, WineDataContext.tbl_Wine_Bottles_Item>();
+            CreateMap<WineDataContext.tbl_Wine_Bottles_Item, Models.UserBottleForEzCreationDto>();
         }
     }
 }

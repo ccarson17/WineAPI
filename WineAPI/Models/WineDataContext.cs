@@ -32,6 +32,7 @@ namespace WineAPI.Models
         {
             [Key]
             public string guid { get; set; }
+            public string owner_guid { get; set; }
             public int? Year { get; set; }
             public string Vintner { get; set; }
             public string WineName { get; set; }
@@ -43,7 +44,7 @@ namespace WineAPI.Models
             public string Country { get; set; }
             public string ExpertRatings { get; set; }
             public int SizeInML { get; set; }
-            public Decimal ABV { get; set; }
+            public Decimal? ABV { get; set; }
             public string WinemakerNotes { get; set; }
         }
 

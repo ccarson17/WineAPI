@@ -32,7 +32,7 @@ namespace WineAPI.Models
         public string ExpertRatings { get; set; }
         [Required]
         public int SizeInML { get; set; }
-        public Decimal ABV { get; set; }
+        public Decimal? ABV { get; set; }
         public string WinemakerNotes { get; set; }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
