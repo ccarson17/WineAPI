@@ -31,7 +31,6 @@ namespace WineAPI.Controllers
             var client = new RestClient("https://dev-364313.okta.com/api/v1/apps/0oa138hfqseIm0EpE4x7/users/" + uid);
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
-            //request.AddHeader("Authorization", "SSWS 00N1sNpyFu0bXooEYaXEzNvkqQvozi0H-vANQ744Eb");
             request.AddHeader("Authorization", "SSWS " + apiKey);
             request.AddHeader("Cookie", "JSESSIONID=A3BE173E706E0FF7AE787C92ABD698B3");
             request.AddParameter("text/plain", "", ParameterType.RequestBody);
