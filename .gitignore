@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /WineAPI/appsettings.json
+/WineAPI/appsettings.Development.json
