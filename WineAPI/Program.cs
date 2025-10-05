@@ -18,12 +18,24 @@ namespace WineAPI
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((context, config) =>
                 {
-                    //if (!context.HostingEnvironment.IsDevelopment())
-                    //{
-                    //    var builtConfig = config.Build();
-                    //    var keyVaultUri = builtConfig["KeyVault:Uri"];
-                    //    config.AddAzureKeyVault(new Uri(keyVaultUri), new DefaultAzureCredential());
-                    //}
+                    if (!context.HostingEnvironment.IsDevelopment())
+                    {
+                        try
+                        {
+                            var builtConfig = config.Build();
+                            var keyVaultUri = builtConfig["KeyVault:Uri"];
+                            config.AddAzureKeyVault(new Uri(keyVaultUri), new DefaultAzureCredential());
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Key Vault config error: " + ex);
+                            throw;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Key Vault bypassed, using local development values.");
+                    }
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
