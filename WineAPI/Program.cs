@@ -1,8 +1,9 @@
+using Azure.Identity;
+using Azure.Extensions.AspNetCore.Configuration.Secrets;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 using System;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Azure.Identity;
 
 namespace WineAPI
 {
@@ -17,12 +18,12 @@ namespace WineAPI
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((context, config) =>
                 {
-                    if (!context.HostingEnvironment.IsDevelopment())
-                    {
-                        var builtConfig = config.Build();
-                        var keyVaultUri = builtConfig["KeyVault:Uri"];
-                        config.AddAzureKeyVault(new Uri(keyVaultUri), new DefaultAzureCredential());
-                    }
+                    //if (!context.HostingEnvironment.IsDevelopment())
+                    //{
+                    //    var builtConfig = config.Build();
+                    //    var keyVaultUri = builtConfig["KeyVault:Uri"];
+                    //    config.AddAzureKeyVault(new Uri(keyVaultUri), new DefaultAzureCredential());
+                    //}
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
